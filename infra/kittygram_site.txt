@@ -1,0 +1,5 @@
+IP: 158.160.75.169;
+name_taski: https://taski.sytes.net/;
+name_kittygram: https://kotoblog.sytes.net/;
+login: yc-user;
+password: JlOv3bJ-5z;
