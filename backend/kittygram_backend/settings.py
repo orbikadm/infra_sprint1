@@ -1,5 +1,4 @@
 import os
-import ast
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -15,7 +14,7 @@ SECRET_KEY = os.getenv(
 
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
 
-ALLOWED_HOSTS = ast.literal_eval(
+ALLOWED_HOSTS = eval(
     os.getenv('ALLOWED_HOSTS', "['127.0.0.1', 'localhost']")
 )
 
