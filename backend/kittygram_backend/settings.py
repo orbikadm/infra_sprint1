@@ -1,21 +1,23 @@
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
+import environ
 
-load_dotenv()
+
+env = environ.Env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv(
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+SECRET_KEY = env(
     'SECRET_KEY',
-    'insecure_key_xq24vp(!g2b0kqo2l)d)hcjpj=4!h09l%_o8%rzxxv%-8j*&yf'
+    default='insecure_key_xq24vp(!g2b0kqo2l)d)hcjpj=4!h09l%_o8%rzxxv%-8j*&yf'
 )
 
-DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
+DEBUG = env('DEBUG', default='False').lower() in ('true', '1', 't')
 
-hosts = os.getenv('ALLOWED_HOSTS', None)
-ALLOWED_HOSTS = eval(hosts) if hosts else ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1', 'localhost'])
 
 INSTALLED_APPS = [
     'django.contrib.admin',
