@@ -1,23 +1,21 @@
-<h1 align="center">Kittygram</h1>
+# Kittygram
 
 
-<h2 align="center">Описание проекта</h2>
+## Описание проекта
 Kittygram — социальная сеть для обмена фотографиями любимых питомцев. Это полностью рабочий проект, который состоит из бэкенд-приложения на Django и фронтенд-приложения на React.
 
 Проект позволяет регистрироваться, добавлять любимых питомцев, указывать их основной цвет, выбирать и добавлять достижения своих питомцев.
 
-<br>
+## Возможности
+В проекте реализовано:
+- Фронтенд на React, бэкенд на Django 3.2.3
+- Система регистрации и аутентификации пользователей
+- Добавление котиков  выбором достижений и расцветки
+- Доступна админ-панель для работы с ресурсами через сайт
 
-<h2 align="center">Возможности</h2>
-В проекте реализовано: <br>
-- Фронтенд на React, бэкенд на Django 3.2.3<br>
-- Система регистрации и аутентификации пользователей<br>
-- Добавление котиков  выбором достижений и расцветки<br>
-- Доступна админ-панель для работы с ресурсами через сайт<br>
+## Инструкция по запуску
 
-<h2 align="center">Инструкция по запуску</h2>
-
-### **Необходимая версия Python 3.9.13**
+**Необходимая версия Python 3.9.13**
 1. Клонируйте проект
 ```
 git@github.com:shkiperzero/api_yamdb.git
@@ -47,10 +45,10 @@ py -m venv venv
 ```
 pip install -r requirements.txt
 ```
-<br>
 
-<h3 align="center">Настройка фронтенд</h3>
-<br>
+
+### Настройка фронтенд ###
+
 
 1. Находясь в директории с фронтенд-приложением, установите зависимости для него
 ```
@@ -64,33 +62,15 @@ npm run build
 ```
 sudo cp -r путь_к_директории_с_фронтенд-приложением/build/. /var/www/kittygram/
 ```
-<br>
 
-<h3 align="center">Настройка бэкенд</h3>
-<br>
-<p>! ! ! До разворачивания проекта необходимо в корне проекта создать файл .env и указать в нём переменные окружения.<br>
-Черновик можно посмотреть в файле .env_example</p>
-<br>
-1. Создайте файл конфигурации юнита systemd для Gunicorn
-```
-sudo nano /etc/systemd/system/gunicorn_kittygram.service
-```
+### Настройка бэкенд
 
-Конфигурация юнита:
-```
-[Unit]
-Description=kittygramm_gunicorn daemon
-After=network.target
+**! ! ! До разворачивания проекта необходимо в директории backend создать файл .env и указать в нём переменные окружения.
+Черновик можно посмотреть в файле .env_example**
 
-[Service]
-User=yc-user
-WorkingDirectory=/home/yc-user/infra_sprint1/backend/
-ExecStart=/home/yc-user/infra_sprint1/venv/bin/gunicorn --bind 0.0.0.0:8080 kittygram_backend.wsgi
+1. Скопируйте и при необходимости отредактируйте файл конфигурации юнита systemd для Gunicorn.
+Файл конфигурации находится по пути backend/infra/gunicorn_kittygram.service
 
-[Install]
-WantedBy=multi-user.target
-
-```
 2. Запустите gunicorn командой 
 ```
 sudo systemctl start gunicorn_kittygram.service
@@ -107,40 +87,9 @@ sudo apt install nginx -y
 ```
 sudo systemctl start nginx
 ```
-6. Обновите настройки Nginx
-```
-sudo nano /etc/nginx/sites-enabled/default
-```
+6. Скопируйте и при необходимости отредактируйте конфигурацию Nginx.
+Файл конфигурации находится по пути backend/infra/default
 
-Настройки:
-```
-server {
-    server_name your-ip your-site.com;
-
-    location /admin/ {
-        proxy_pass http://127.0.0.1:8080;
-        client_max_body_size 20M;
-    }
-
-    location /api/ {
-        proxy_pass http://127.0.0.1:8080;
-        client_max_body_size 20M;
-    }
-
-    location /media/ {
-        alias /var/www/kittygram/media/;
-
-    }
-
-    location / {
-        root /var/www/kittygram;
-        index index.html index.htm;
-        try_files $uri /index.html;
-    }
-
-}
-
-```
 7. Проверьте корректность настроек
 ```
 nginx -t
@@ -174,11 +123,11 @@ pip install -r requirements.txt
 ```
 
 
-<h2 align="center">Использованные технологии</h2>
-<p>Проект реализован на языке Python версии 3.9.13</p>
-<p>Фреймворк разработки - Django версии 3.2.16</p>
-<p>Api реализовано на Django Rest Framework версии 3.12.4</p>
+## Использованные технологии
+Проект реализован на языке Python версии 3.9.13
+Фреймворк разработки - Django версии 3.2.16
+Api реализовано на Django Rest Framework версии 3.12.4
 
-<h2 align="center">Об авторе</h2>
-Автор - студент Яндекс.Практикум 25 когорты Константин Упоров. Python backend-разработчик.<br>
-email для связи - orbikadm@gmail.com
+## Об авторе
+Автор - студент Яндекс.Практикум 25 когорты Константин Упоров. Python backend-разработчик.
+email для связи - <orbikadm@gmail.com>
