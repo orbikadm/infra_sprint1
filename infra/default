@@ -53,7 +53,6 @@ server {
     if ($host = taski.sytes.net) {
         return 301 https://$host$request_uri;
     }
-
     listen 80;
     server_name 158.160.75.169 taski.sytes.net;
     return 404;
@@ -63,7 +62,6 @@ server {
     if ($host = kotoblog.sytes.net) {
         return 301 https://$host$request_uri;
     }
-    
     server_name 158.160.75.169 kotoblog.sytes.net;
     listen 80;
     return 404;
