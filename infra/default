@@ -3,14 +3,17 @@ server {
     location /admin/ {
         proxy_pass http://127.0.0.1:8000;
     }
+
     location /api/ {
         proxy_pass http://127.0.0.1:8000;
     }
+
     location / {
         root   /var/www/taski;
         index  index.html index.htm;
         try_files $uri /index.html;
     }
+
     listen 443 ssl;
     ssl_certificate /etc/letsencrypt/live/taski.sytes.net/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/taski.sytes.net/privkey.pem;
@@ -24,18 +27,22 @@ server {
         proxy_pass http://127.0.0.1:8080;
         client_max_body_size 20M;
     }
+
     location /api/ {
         proxy_pass http://127.0.0.1:8080;
         client_max_body_size 20M;
     }
+
     location /media/ {
         alias /var/www/kittygram/media/;
     }
+
     location / {
         root /var/www/kittygram;
         index index.html index.htm;
         try_files $uri /index.html;
     }
+
     listen 443 ssl;
     ssl_certificate /etc/letsencrypt/live/kotoblog.sytes.net/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/kotoblog.sytes.net/privkey.pem;
@@ -46,6 +53,7 @@ server {
     if ($host = taski.sytes.net) {
         return 301 https://$host$request_uri;
     }
+
     listen 80;
     server_name 158.160.75.169 taski.sytes.net;
     return 404;
@@ -55,6 +63,7 @@ server {
     if ($host = kotoblog.sytes.net) {
         return 301 https://$host$request_uri;
     }
+    
     server_name 158.160.75.169 kotoblog.sytes.net;
     listen 80;
     return 404;
